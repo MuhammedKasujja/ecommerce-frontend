@@ -1,17 +1,23 @@
 import { Card } from "src/components";
 import StatusCard from "./components/StatusCard";
+import StatusTab from "./components/StatusTab";
 
 const Dashboard: React.FC = () => {
   return (
     <>
       <Card>
-        <div className="w-full">
-          <div className="flex gap-2">
-            <StatusCard label="PENDING" color="#3E215D" />
-            <StatusCard label="CONFIRMED" color="#001E6C" />
-            <StatusCard label="PROCESSING" color="#053742" />
-            <StatusCard label="OUT FOR DELIVERLY" color="#343A40" />
+        <div className="w-full flex flex-col gap-4">
+          <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            <StatusCard label="PENDING" color="#3E215D" value="50" />
+            <StatusCard label="CONFIRMED" color="#001E6C" value="100" />
+            <StatusCard label="PROCESSING" color="#053742" value="50" />
+            <StatusCard
+              label="OUT FOR DELIVERLY"
+              color="#343A40"
+              value="23000"
+            />
           </div>
+          <StatusTab/>
         </div>
       </Card>
     </>

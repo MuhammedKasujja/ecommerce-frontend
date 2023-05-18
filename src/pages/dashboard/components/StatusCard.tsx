@@ -12,7 +12,7 @@ const StatusCard: React.FC<StatusCardprops> = ({
   icon,
 }) => {
   return (
-    <div style={{ backgroundColor: color }} className="text-white rounded-lg w-full p-5">
+    <div style={{ backgroundColor: color }} className="text-white rounded-lg p-5">
       <p className="text-sm font-medium">{label}</p>
       <div className="flex justify-between pt-2">
         <p className="font-bold text-lg">{value}</p>
