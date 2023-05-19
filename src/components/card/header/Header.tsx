@@ -3,7 +3,7 @@ import { HeaderProps } from "./Header.type";
 const CardHeader = ({ title }: HeaderProps) => {
   return (
     <>
-      <p className="">{title}</p>
+      <p className="font-bold">{title}</p>
     </>
   );
 };

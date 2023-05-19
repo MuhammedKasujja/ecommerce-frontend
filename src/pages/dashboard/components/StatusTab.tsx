@@ -13,7 +13,7 @@ const StatusCard = ({ label, value, icon }: StatusCardprops) => {
       <div className="flex justify-between">
         <div className="font-bold">{value}</div>
       </div>
-      <div className="absolute top-6 right-5 p-1 bg-gray-300 rounded-full">
+      <div className="absolute top-6 right-5 p-1 bg-gray-200 rounded-full">
         {icon ?? "@"}
       </div>
     </div>
