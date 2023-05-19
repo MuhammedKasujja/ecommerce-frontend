@@ -1,426 +1,506 @@
-
 const menus = [
-    {
-      url: "/",
-      name: "Dashboard",
-      slug: "dashboard",
-      icon: "desktop",
-      gate: undefined,
-    },
-    {
-      navheader: "Modules",
-    },
-    {
-      url: "#",
-      name: "Customer",
-      slug: "customers",
-      icon: "users",
-      gate: "passengers.index",
-      submenu: [
-        {
-          url: "/users",
-          name: "Passengers",
-          slug: "clients",
-          icon: "bx bx-right-arrow-alt",
-          gate: "passengers.index",
-        },
-        {
-          url: "/clients/add",
-          name: "Add Passenger",
-          slug: "register-clients",
-          icon: "bx bx-right-arrow-alt",
-          gate: "passengers.save",
-        },
-      ],
-    },
-    {
-      url: "#",
-      name: "Drivers",
-      slug: "app-email",
-      icon: "envelope-pull",
-      gate: "providers.index",
-      submenu: [
-        {
-          url: "/drivers",
-          name: "Drivers",
-          slug: "register",
-          icon: "envelope-pull",
-          gate: "providers.index",
-        },
-        {
-          url: "/drivers/add",
-          name: "Add Driver",
-          slug: "providers",
-          icon: "bx bx-right-arrow-alt",
-          gate: "providers.save",
-        },
-        {
-          url: "/stations",
-          name: "Stations",
-          slug: "stations",
-          icon: "check-alt",
-          gate: 'stations.index',
-        },
-      ],
-    },
-    // {
-    //   url: "#",
-    //   name: "Corporates",
-    //   slug: "app-email",
-    //   icon: "calendar",
-    //   submenu: [
-    //     {
-    //       url: "/corporates",
-    //       name: "Corporates",
-    //     },
-    //     {
-    //       url: "/corporates/add",
-    //       name: "Add Corporates",
-    //     },
-    //   ],
-    // },
-    {
-      url: "#",
-      name: "Managers",
-      slug: "app-email",
-      icon: "grid",
-      gate: 'managers.index',
-      submenu: [
-        {
-          url: "/managers",
-          name: "Managers",
-          slug: "managers",
-          gate: 'managers.index',
-        },
-        {
-          url: "/add-managers",
-          name: "Add managers",
-          slug: "add-managers",
-          gate: 'managers.save',
-        },
-      ],
-    },
-    {
-      url: "#",
-      name: "Users",
-      slug: "app-email",
-      icon: "grid",
-      gate: "sub_admins.index",
-      submenu: [
-        {
-          url: "/users",
-          name: "Users",
-          slug: "sub-admins",
-          gate: "sub_admins.index",
-        },
-        {
-          url: "/users-add",
-          name: "Add Users",
-          slug: "add-sub-admins",
-          gate: "sub_admins.save",
-        },
-      ],
-    },
-    {
-      url: "/dispatchers",
-      name: "Dispatchers",
-      slug: "maps",
-      icon: "map",
-      gate: 'requests.active',
-    },
-  
-    ///////// Booking Management ////////////////
-    {
-      navheader: "Booking Management",
-      gate: 'bookings.dashboard',
-    },
-    {
-      url: "/bookings/dashboard",
-      name: "Booking Dashboard",
-      slug: "bookings",
-      icon: "notebook",
-      gate: 'bookings.dashboard',
-    },
-    {
-      url: "/orders",
-      name: "Ride Requests",
-      slug: "trips",
-      icon: "check-alt",
-      gate: 'requests.index',
-    },
-    {
-      url: "#",
-      name: "Reviews",
-      slug: "app-reviews-types-menu",
-      icon: "envelope-pull",
-      gate: 'reviews.users',
-      submenu: [
-        {
-          url: "/reports",
-          name: "Passengers",
-          slug: "passenger-ratings",
-          icon: "check-alt",
-          gate: 'reviews.users',
-        },
-        {
-          url: "/dratings",
-          name: "Drivers",
-          slug: "driver-ratings",
-          icon: "check-alt",
-          gate: 'reviews.providers',
-        },
-      ],
-    },
-    {
-      url: "#",
-      name: "Service Types",
-      slug: "app-service-types-menu",
-      icon: "envelope-pull",
-      gate: 'service_types.index',
-      submenu: [
-        {
-          url: "/service-types",
-          name: "Service Types",
-          slug: "vehicle-types",
-          icon: "envelope-pull",
-          gate: 'service_types.index',
-        },
-        {
-          url: "/service-types/add",
-          name: "Add Service Types",
-          slug: "add-vehicle-types",
-          icon: "envelope-pull",
-          gate: 'service_types.save',
-        },
-      ],
-    },
-    ///////// End Booking Management////////
-  
-    {
-      navheader: "Revenue Management",
-      gate: 'revenues.dashboard',
-    },
-    {
-      url: "/revenues",
-      name: "Revenue Dashboard",
-      slug: "revenues",
-      icon: "pulse",
-      gate: 'revenues.dashboard',
-    },
-    {
-      url: "#",
-      name: "Promo Codes",
-      slug: "app-promocodes-menu",
-      icon: "check-alt",
-      gate: 'promo_codes.index',
-      submenu: [
-        {
-          url: "/promo-codes",
-          name: "Promo Codes",
-          slug: "promo-codes",
-          icon: "check-alt",
-          gate: 'promo_codes.index',
-        },
-        {
-          url: "/add-promo-code",
-          name: "Add Promo Code",
-          slug: "add-promo-code",
-          icon: "comments",
-          gate: 'promo_codes.save',
-        },
-      ],
-    },
-    {
-      url: "/transactions",
-      name: "Transactions",
-      slug: "transactions",
-      icon: "check-alt",
-      gate: 'payments.index',
-    },
-  
-    ///////// Wallet Management ////////////////
-    {
-      navheader: "Wallets",
-      gate: 'wallets.dashboard',
-    },
-    {
-      url: "/passengers/wallets",
-      name: "Passenger Wallets",
-      slug: "passenger-wallets",
-      icon: "envelope-pull",
-      gate: 'wallets.user.index',
-    },
-    {
-      url: "/driver/wallets",
-      name: "Driver Wallets",
-      slug: "driver-wallets",
-      icon: "comments",
-      gate: 'wallets.provider.index',
-    },
-    {
-      url: "/wallets/payment",
-      name: "Passenger Payments",
-      slug: "passenger-wallets-payment",
-      icon: "check-alt",
-      gate: 'wallets.user.payments',
-    },
-    {
-      url: "/dwallets/payments",
-      name: "Driver Payments",
-      slug: "driver-wallets-payments",
-      icon: "check-alt",
-      gate: 'wallets.provider.payments',
-    },
-    {
-      url: "/redeems/passenger",
-      name: "Passenger Redeems",
-      slug: "clients-redeems",
-      icon: "check-alt",
-      gate: 'user.redeem_requests.index',
-    },
-    {
-      url: "/dRedeems/redeems",
-      name: "Driver Redeems",
-      slug: "drivers-redeems",
-      icon: "check-alt",
-      gate: 'provider.redeem_requests.index',
-    },
-    ///////// End Wallet Management ////////////////
-  
-    ///////// Vehicle Management ////////////////
-    {
-      navheader: "Vehicle Management",
-      gate: "vehicles.index"
-    },
-    {
-      url: "/vehicles",
-      name: "Vehicles",
-      slug: "vehicles",
-      icon: "car",
-      gate: "vehicles.index",
-    },
-    {
-      url: "/vehicles/add",
-      name: "Add Vehicles",
-      slug: "add-vehicle",
-      icon: "check-alt",
-      gate: "vehicles.create"
-    },
-    {
-      url: "/vehicle-settings",
-      name: "Vehicle Settings",
-      slug: "vehicle-settings",
-      icon: "settings",
-      gate: "vehicles.settings"
-    },
-    ///////// End Vehicle Management////////
-    {
-      navheader: "Settings Management",
-      gate: "settings.save"
-    },
-    {
-      url: "#",
-      name: "Documents",
-      slug: "app-documents-menu",
-      icon: "envelope-pull",
-      gate: 'documents.index',
-      submenu: [
-        {
-          url: "/documents",
-          name: "Documents",
-          slug: "documents",
-          icon: "envelope-pull",
-          gate: 'documents.index',
-        },
-        {
-          url: "/add-document",
-          name: "Add Document",
-          slug: "add-document",
-          icon: "comments",
-          gate: 'documents.save',
-        },
-      ],
-    },
-    {
-      url: "#",
-      name: "Adverts",
-      slug: "app-adverts-menu",
-      icon: "comments",
-      gate: 'ads.index',
-      submenu: [
-        {
-          url: "/adverts",
-          name: "Adverts",
-          slug: "adverts",
-          icon: "check-alt",
-          gate: 'ads.index',
-        },
-        {
-          url: "/add-adverts",
-          name: "New Advert",
-          slug: "add-adverts",
-          icon: "check-alt",
-          gate: 'ads.save',
-        },
-      ],
-    },
-    {
-      url: "#",
-      name: "Pages",
-      slug: "app-pages-menu",
-      icon: "check-alt",
-      gate: 'static_pages.index',
-      submenu: [
-        {
-          url: "/pages",
-          name: "Pages",
-          slug: "pages",
-          icon: "calendar",
-          gate: 'static_pages.index',
-        },
-        {
-          url: "/add-pages",
-          name: "Add Pages",
-          slug: "add-pages",
-          icon: "check-alt",
-          gate: 'static_pages.save',
-        },
-      ],
-    },
-    {
-      url: "/custom-push",
-      name: "Custom push",
-      slug: "send-push-notification",
-      icon: "calendar",
-      gate: 'push_notification.save',
-    },
-    {
-      url: "/roles",
-      name: "Roles Management",
-      slug: "roles",
-      icon: "grid",
-      gate: 'roles.index',
-    },
-    // {
-    //   url: "/user-permissions",
-    //   name: "User Permissions",
-    //   slug: "user-permissions",
-    //   icon: "grid",
-    // },
-    {
-      url: "/reports",
-      name: "Reports",
-      slug: "reports",
-      icon: "line-chart",
-      gate: undefined,
-    },
-    {
-      url: "/settings",
-      name: "Settings",
-      slug: "settings",
-      icon: "gears",
-      gate: "settings.save"
-    },
-  ]
-  
-  export default menus
+  {
+    url: "dashboard",
+    name: "Dashboard",
+    slug: "dashboard",
+    icon: "desktop",
+    gate: undefined,
+  },
+  {
+    navheader: "Order Management",
+  },
+  {
+    url: "#",
+    name: "Orders",
+    slug: "customers",
+    icon: "users",
+    gate: "passengers.index",
+    submenu: [
+      {
+        url: "/orders",
+        name: "All",
+        slug: "clients",
+        icon: "bx bx-right-arrow-alt",
+        gate: "passengers.index",
+      },
+      {
+        url: "/orders/pending",
+        name: "Pending",
+        slug: "register-clients",
+        icon: "bx bx-right-arrow-alt",
+        gate: "passengers.save",
+      },
+      {
+        url: "/orders/confirmed",
+        name: "Confirmed",
+        slug: "clients",
+        icon: "bx bx-right-arrow-alt",
+        gate: "passengers.index",
+      },
+      {
+        url: "orders/processing",
+        name: "Processing",
+        slug: "register-clients",
+        icon: "bx bx-right-arrow-alt",
+        gate: "passengers.save",
+      },
+      {
+        url: "orders/out-for-delivery",
+        name: "Out for delivery",
+        slug: "clients",
+        icon: "bx bx-right-arrow-alt",
+        gate: "passengers.index",
+      },
+      {
+        url: "orders/delivered",
+        name: "Delivered",
+        slug: "register-clients",
+        icon: "bx bx-right-arrow-alt",
+        gate: "passengers.save",
+      },
+      {
+        url: "orders/returned",
+        name: "Returned",
+        slug: "clients",
+        icon: "bx bx-right-arrow-alt",
+        gate: "passengers.index",
+      },
+      {
+        url: "orders/failed",
+        name: "Failed",
+        slug: "register-clients",
+        icon: "bx bx-right-arrow-alt",
+        gate: "passengers.save",
+      },
+      {
+        url: "orders/canceled",
+        name: "Canceled",
+        slug: "register-clients",
+        icon: "bx bx-right-arrow-alt",
+        gate: "passengers.save",
+      },
+    ],
+  },
+  {
+    navheader: "PRODUCT MANAGEMENT",
+  },
+  {
+    url: "#",
+    name: "Brands",
+    slug: "app-email",
+    icon: "envelope-pull",
+    gate: "providers.index",
+    submenu: [
+      {
+        url: "/brands/add",
+        name: "Add new",
+        slug: "providers",
+        icon: "bx bx-right-arrow-alt",
+        gate: "providers.save",
+      },
+      {
+        url: "/brands",
+        name: "list",
+        slug: "register",
+        icon: "envelope-pull",
+        gate: "providers.index",
+      },
+    ],
+  },
+  {
+    url: "#",
+    name: "Categories",
+    slug: "app-email",
+    icon: "grid",
+    gate: "managers.index",
+    submenu: [
+      {
+        url: "/categories",
+        name: "Categories",
+        slug: "managers",
+        gate: "managers.index",
+      },
+      {
+        url: "/sub-categories",
+        name: "Sub category",
+        slug: "add-managers",
+        gate: "managers.save",
+      },
+      {
+        url: "/sub-sub-category",
+        name: "Sub sub category",
+        slug: "add-managers",
+        gate: "managers.save",
+      },
+    ],
+  },
+  {
+    url: "/attributes",
+    name: "Attributes",
+    slug: "add-managers",
+    gate: "managers.save",
+  },
+  {
+    url: "#",
+    name: "InHouse Products",
+    slug: "app-email",
+    icon: "grid",
+    gate: "sub_admins.index",
+    submenu: [
+      {
+        url: "/products/in-house",
+        name: "Products",
+        slug: "sub-admins",
+        gate: "sub_admins.index",
+      },
+      {
+        url: "/bulk-import",
+        name: "Bulk import",
+        slug: "add-sub-admins",
+        gate: "sub_admins.save",
+      },
+      {
+        url: "/bulk-export",
+        name: "Bulk Export",
+        slug: "add-sub-admins",
+        gate: "sub_admins.save",
+      },
+    ],
+  },
+  {
+    url: "#",
+    name: "Seller Products",
+    slug: "app-email",
+    icon: "grid",
+    gate: "sub_admins.index",
+    submenu: [
+      {
+        url: "/products/seller/new",
+        name: "New Products",
+        slug: "sub-admins",
+        gate: "sub_admins.index",
+      },
+      {
+        url: "/products/seller/approved",
+        name: "Approved Products",
+        slug: "add-sub-admins",
+        gate: "sub_admins.save",
+      },
+      {
+        url: "/products/seller/denied",
+        name: "Denied Products",
+        slug: "add-sub-admins",
+        gate: "sub_admins.save",
+      },
+    ],
+  },
+  ///////// MARKETING SECTION ////////////////
+  {
+    navheader: "MARKETING SECTION",
+    gate: "bookings.dashboard",
+  },
+  {
+    url: "/stock",
+    name: "Product Stock",
+    slug: "bookings",
+    icon: "notebook",
+    gate: "bookings.dashboard",
+  },
+  {
+    url: "/reviews",
+    name: "Customer Reviews",
+    slug: "trips",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  {
+    url: "/wish-list",
+    name: "Product in wish list",
+    slug: "bookings",
+    icon: "notebook",
+    gate: "bookings.dashboard",
+  },
+  {
+    url: "/transactions",
+    name: "Transactions",
+    slug: "trips",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  ///////// USER SECTION ////////////////
+  {
+    navheader: "USER SECTION",
+    gate: "bookings.dashboard",
+  },
+  {
+    url: "#",
+    name: "Seller",
+    slug: "app-reviews-types-menu",
+    icon: "envelope-pull",
+    gate: "reviews.users",
+    submenu: [
+      {
+        url: "/sellers",
+        name: "List",
+        slug: "passenger-ratings",
+        icon: "check-alt",
+        gate: "reviews.users",
+      },
+      {
+        url: "/seller/withdraws",
+        name: "Withdraws",
+        slug: "driver-ratings",
+        icon: "check-alt",
+        gate: "reviews.providers",
+      },
+    ],
+  },
+  {
+    url: "/customers",
+    name: "Customers",
+    slug: "trips",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  ///////// SUPPORT SECTION ////////////////
+  {
+    navheader: "SUPPORT SECTION",
+    gate: "bookings.dashboard",
+  },
+  {
+    url: "/messages",
+    name: "Messages",
+    slug: "messages",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  {
+    url: "/support-tickets",
+    name: "Support ticket",
+    slug: "trips",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  ///////// BUSINESS SETTINGS ////////////////
+  {
+    navheader: "BUSINESS SETTINGS",
+    gate: "bookings.dashboard",
+  },
+  {
+    url: "/seller-settings",
+    name: "Seller Settings",
+    slug: "messages",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  {
+    url: "/payment-methods",
+    name: "Payment method",
+    slug: "messages",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  {
+    url: "/sms-module",
+    name: "SMS module",
+    slug: "messages",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+
+  {
+    url: "#",
+    name: "Shipping method",
+    slug: "app-service-types-menu",
+    icon: "envelope-pull",
+    gate: "service_types.index",
+    submenu: [
+      {
+        url: "/shipping-methods",
+        name: "list",
+        slug: "vehicle-types",
+        icon: "envelope-pull",
+        gate: "service_types.index",
+      },
+      {
+        url: "/shipping-methods/settings",
+        name: "Settings",
+        slug: "add-vehicle-types",
+        icon: "envelope-pull",
+        gate: "service_types.save",
+      },
+    ],
+  },
+  {
+    url: "/languages",
+    name: "Languages",
+    slug: "messages",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  {
+    url: "/social-login",
+    name: "Social Login",
+    slug: "messages",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  {
+    url: "/currecies",
+    name: "Currencies",
+    slug: "messages",
+    icon: "check-alt",
+    gate: "requests.index",
+  },
+  ///////// End BUSINESS SETTINGS ////////
+
+  {
+    navheader: "WEB & APP SETTINGS",
+    gate: "revenues.dashboard",
+  },
+  {
+    url: "/web-config",
+    name: "Web config",
+    slug: "transactions",
+    icon: "check-alt",
+    gate: "payments.index",
+  },
+  {
+    url: "/mail-config",
+    name: "Mail config",
+    slug: "transactions",
+    icon: "check-alt",
+    gate: "payments.index",
+  },
+  {
+    url: "/notifications",
+    name: "Notifications",
+    slug: "revenues",
+    icon: "pulse",
+    gate: "revenues.dashboard",
+  },
+  {
+    url: "#",
+    name: "Page setup",
+    slug: "app-promocodes-menu",
+    icon: "check-alt",
+    gate: "promo_codes.index",
+    submenu: [
+      {
+        url: "/terms-and-conditions",
+        name: "Terms and conditions",
+        slug: "promo-codes",
+        icon: "check-alt",
+        gate: "promo_codes.index",
+      },
+      {
+        url: "/privacy-policy",
+        name: "Privacy policy",
+        slug: "add-promo-code",
+        icon: "comments",
+        gate: "promo_codes.save",
+      },
+      {
+        url: "/about-us",
+        name: "About us",
+        slug: "promo-codes",
+        icon: "check-alt",
+        gate: "promo_codes.index",
+      },
+      {
+        url: "/faq",
+        name: "Faq",
+        slug: "add-promo-code",
+        icon: "comments",
+        gate: "promo_codes.save",
+      },
+    ],
+  },
+  {
+    url: "/social-media",
+    name: "Social media",
+    slug: "transactions",
+    icon: "check-alt",
+    gate: "payments.index",
+  },
+
+  ///////// REPORT& ANALYTICS ////////////////
+  {
+    navheader: "REPORT& ANALYTICS",
+    gate: "wallets.dashboard",
+  },
+  {
+    url: "/earnings-report",
+    name: "Earning Report",
+    slug: "passenger-wallets",
+    icon: "envelope-pull",
+    gate: "wallets.user.index",
+  },
+  {
+    url: "/order-report",
+    name: "Order Report",
+    slug: "driver-wallets",
+    icon: "comments",
+    gate: "wallets.provider.index",
+  },
+  {
+    url: "#",
+    name: "Sale report",
+    slug: "app-promocodes-menu",
+    icon: "check-alt",
+    gate: "promo_codes.index",
+    submenu: [
+      {
+        url: "/sales/inhouse",
+        name: "Inhouse Sale",
+        slug: "promo-codes",
+        icon: "check-alt",
+        gate: "promo_codes.index",
+      },
+      {
+        url: "/sales/seller",
+        name: "Seller Sale",
+        slug: "add-promo-code",
+        icon: "comments",
+        gate: "promo_codes.save",
+      },
+    ],
+  },
+  ///////// EMPLOYEE SECTION ////////////////
+  {
+    navheader: "EMPLOYEE SECTION",
+    gate: "wallets.dashboard",
+  },
+  {
+    url: "/employees/role",
+    name: "Employee role",
+    slug: "passenger-wallets-payment",
+    icon: "check-alt",
+    gate: "wallets.user.payments",
+  },
+  {
+    url: "#",
+    name: "Employees",
+    slug: "app-promocodes-menu",
+    icon: "check-alt",
+    gate: "promo_codes.index",
+    submenu: [
+      {
+        url: "/employees/add",
+        name: "Add new",
+        slug: "promo-codes",
+        icon: "check-alt",
+        gate: "promo_codes.index",
+      },
+      {
+        url: "/employees/list",
+        name: "List",
+        slug: "add-promo-code",
+        icon: "comments",
+        gate: "promo_codes.save",
+      },
+    ],
+  },
+];
+
+export default menus;

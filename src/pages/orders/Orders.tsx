@@ -1,4 +1,4 @@
-import { Table } from "src/components";
+import { Card, Table } from "src/components";
 import { Order, ColumnDef } from "src/types";
 import { useMemo } from "react";
 
@@ -7,35 +7,35 @@ const Orders: React.FC = () => {
     () => [
       {
         header: "SL#",
-        accessorFn: (row) => row.id
+        accessorFn: (row) => row.id,
       },
       {
         header: "ORDER",
-        accessorFn: (row) => row.description
+        accessorFn: (row) => row.description,
       },
       {
         header: "DATE",
-        accessorFn: (row) => row.date
+        accessorFn: (row) => row.date,
       },
       {
         header: "CUSTOMER NAME",
-        accessorFn: (row) => row.customer
+        accessorFn: (row) => row.customer,
       },
       {
         header: "STATUS",
-        accessorFn: (row) => row.state
+        accessorFn: (row) => row.state,
       },
       {
         header: "TOTAL",
-        accessorFn: (row) => row.total
+        accessorFn: (row) => row.total,
       },
       {
         header: "ORDER STATUS",
-        accessorFn: (row) => row.status
+        accessorFn: (row) => row.status,
       },
       {
         header: "ACTION",
-        id: 'action'
+        id: "action",
       },
     ],
     []
@@ -43,7 +43,9 @@ const Orders: React.FC = () => {
 
   return (
     <>
-      {/* <Table columns={cols}></Table> */}
+      <Card>
+        <Table columns={cols} data={[]} onSearch={(query) => {}}></Table>
+      </Card>
     </>
   );
 };

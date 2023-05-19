@@ -6,6 +6,7 @@ import WalletCard from "./components/WalletCard";
 const Dashboard: React.FC = () => {
   return (
     <>
+    <div className="font-bold text-2xl mb-2">Dahboard</div>
       <Card
         header={
           <div className="flex justify-center flex-wrap gap-2 md:justify-between">
@@ -21,7 +22,7 @@ const Dashboard: React.FC = () => {
           </div>
         }
       >
-        <div className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-6 pb-2">
           <div className="grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             <StatusCard label="PENDING" color="#3E215D" value="50" />
             <StatusCard label="CONFIRMED" color="#001E6C" value="100" />

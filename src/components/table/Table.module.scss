@@ -8,7 +8,7 @@
       @apply min-w-full py-4 inline-block sm:px-6 lg:px-8;
 
       .table_container {
-        @apply p-2 overflow-hidden;
+        @apply py-2 overflow-hidden;
 
         .table {
           @apply min-w-full text-center;
@@ -19,7 +19,7 @@
             .table_head_row {
 
               .table_row_header {
-                @apply px-6 py-4 text-sm font-medium text-gray-900;
+                @apply px-6 py-4 text-sm font-medium text-gray-500 uppercase;
               }
             }
           }

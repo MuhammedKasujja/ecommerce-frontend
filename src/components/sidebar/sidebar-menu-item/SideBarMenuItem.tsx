@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MenuItem } from "../types";
 import { mergeClassNames } from "src/utils/utils";
 import classes from "./SideBarMenuItem.module.scss";
@@ -9,7 +9,7 @@ const SideBarMenuItem: React.FC<MenuItem> = (item) => {
   const [active, setActive] = useState(selected);
   const [selectedMenu, setSelectedMenu] = useState<string | undefined>();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClickScroll = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -23,7 +23,7 @@ const SideBarMenuItem: React.FC<MenuItem> = (item) => {
     setSelectedMenu(undefined);
     if (!selected) setActive(false);
     if (active && !item.submenu) {
-      // navigate(item.url);
+      navigate(item.url);
     }
   }, [selected]);
 
@@ -37,8 +37,8 @@ const SideBarMenuItem: React.FC<MenuItem> = (item) => {
         )}
       >
         <div
-          className={`flex justify-between p-2 select-none ${
-            selected ? "text-[#5A8DEE]" : ""
+          className={`flex justify-between p-2 select-none text-sm ${
+            selected ? "text-[#C6FFC1]" : ""
           }`}
           id={item.name}
           onClick={() => {
@@ -58,9 +58,9 @@ const SideBarMenuItem: React.FC<MenuItem> = (item) => {
             {item.submenu && <hr className="border-1 border-[#464d5c]" />}
             {item.submenu?.map((menu) => (
               <p
-                className={`text-left cursor-pointer p-2 select-none ${
+                className={`text-left cursor-pointer p-2 select-none text-sm ${
                   selectedMenu === menu.name
-                    ? "bg-[#464d5c] text-[#5A8DEE]" //"bg-[#5a8dee] text-[#5A8DEE] opacity-10"
+                    ? "bg-[#464d5c] text-[#C6FFC1]" //"bg-[#5a8dee] text-[#5A8DEE] opacity-10"
                     : ""
                 }`}
                 id={menu.name}
@@ -68,7 +68,7 @@ const SideBarMenuItem: React.FC<MenuItem> = (item) => {
                 onClick={() => {
                   setSelectedMenu(menu.name);
                   handleClickScroll(menu.name);
-                  // navigate(menu.url);
+                  navigate(menu.url);
                 }}
               >
                 <span className="pr-2">&#62;</span>
