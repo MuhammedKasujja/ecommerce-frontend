@@ -4,7 +4,6 @@ import { ReactNode } from "react";
     icon?: string;
     name: string;
     gate?: string,
-    slug?: string,
     url: string
 }
 
