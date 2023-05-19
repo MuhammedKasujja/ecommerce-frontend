@@ -5,7 +5,7 @@ const SubCategoryForm: React.FC = () => {
     <Card header="Sub category form">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
         <TextField label="Sub category Name" placeholder="Sub category Name" />
-        <Select />
+        <Select label="Main Category"/>
       </div>
       <div className="flex justify-end">
         <Button className="">Submit</Button>

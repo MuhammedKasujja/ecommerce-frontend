@@ -86,3 +86,8 @@
       }
     }
   }
+
+
+  .label{
+    @include label-default;
+  }
