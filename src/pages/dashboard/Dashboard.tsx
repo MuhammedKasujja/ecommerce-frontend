@@ -2,11 +2,16 @@ import { Card, Select } from "src/components";
 import StatusCard from "./components/StatusCard";
 import StatusTab from "./components/StatusTab";
 import WalletCard from "./components/WalletCard";
+import { ProductService } from "src/api";
 
 const Dashboard: React.FC = () => {
+  
+  const { data, pagination, loading, error } = ProductService.fetchAll();
+
+  console.log({data, pagination, loading, error})
   return (
     <>
-    <div className="font-bold text-2xl mb-2">Dahboard</div>
+      <div className="font-bold text-2xl mb-2">Dahboard</div>
       <Card
         header={
           <div className="flex justify-center flex-wrap gap-2 md:justify-between">
