@@ -73,7 +73,7 @@ const router = createBrowserRouter([
         path: "brands/add",
         element: <AddBrand />,
       },
-      //  brands
+      // end brands
 
       // Categories
 

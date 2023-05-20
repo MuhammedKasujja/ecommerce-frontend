@@ -71,7 +71,7 @@ const SideBarMenuItem: React.FC<MenuItem> = (item) => {
                   navigate(menu.url);
                 }}
               >
-                <span className="pr-2">&#62;</span>
+                <span className="pr-2 text-xl">&sdot;</span>
                 {menu.name}
               </p>
             ))}
