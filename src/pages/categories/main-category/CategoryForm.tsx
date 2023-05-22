@@ -6,7 +6,7 @@ import { CategoryDTO } from "src/types";
 const CategoryForm: React.FC = () => {
   const [category, setCategory] = useState<CategoryDTO>();
   const [submit, setSubmit] = useState(0);
-  const { loading, error, data } = CategoryService.addNew(category!, submit);
+  const { loading, error, data, message } = CategoryService.addNew(category!, submit);
 
   const handleChange = (data: Record<string, any>) => {
     setCategory((prevCat) => ({ ...prevCat!, ...data }));
@@ -16,6 +16,9 @@ const CategoryForm: React.FC = () => {
     <Card header="Category form">
       {error && (
         <div className="text-red-600 bg-red-100 p-1 rounded">{error}</div>
+      )}
+      {message && (
+        <div className="text-green-600 bg-green-100 p-1 rounded">{message}</div>
       )}
       <div className="flex flex-col gap-4 mb-4">
         <TextField

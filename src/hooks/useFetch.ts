@@ -14,6 +14,7 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
   const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<String>();
+  const [message, setMessage] = useState<String>();
   const [pagination, setPagination] = useState<PaginationProps>();
 
   useEffect(() => {
@@ -22,6 +23,7 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
     const fetchData = async () => {
       setLoading(true);
       setError(undefined);
+      setMessage(undefined)
       // setData(undefined);
       try {
         const response = await axios.request({
@@ -31,7 +33,8 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
           data: config.data,
           // cancelToken: source.token
         });
-        const { payload, error } = response.data;
+        const { payload, error, message} = response.data;
+        setMessage(message)
         if (error) {
           setError(error);
         } else {
@@ -65,5 +68,6 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
     loading,
     error,
     pagination,
+    message,
   };
 }
