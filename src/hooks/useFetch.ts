@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import axios, { Method } from "axios";
 import { PaginationProps } from "src/components/table/pagination/Pagination.type";
 
-type IAPIMethod = {
-  type?: Method;
-  withPagination: boolean;
+type IAPIConfig = {
+  type: Method;
+  withPagination?: boolean;
+  data?: any;
 };
 
-export function useFetch<T>(
-  url: string,
-  { type = "GET", withPagination = false }: IAPIMethod
-) {
+export function useFetch<T>(url: string, config: IAPIConfig) {
   const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<String>();
@@ -23,15 +21,16 @@ export function useFetch<T>(
       try {
         const response = await axios.request({
           url,
-          method: type,
+          method: config.type ?? "GET",
           signal: controller.signal,
+          data: config.data,
           // cancelToken: source.token
         });
         const { payload, error } = response.data;
         if (error) {
           setError(error);
         } else {
-          if (withPagination) {
+          if (config.withPagination) {
             // console.log({payload})
             const { data, ...rest } = payload;
             setData(data);
@@ -53,7 +52,7 @@ export function useFetch<T>(
       controller.abort();
       // source.cancel()
     };
-  }, [url, type]);
+  }, [url, config.type]);
 
   return {
     data,

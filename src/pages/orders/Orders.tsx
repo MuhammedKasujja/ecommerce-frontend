@@ -1,8 +1,12 @@
 import { Card, Table } from "src/components";
 import { Order, ColumnDef } from "src/types";
 import { useMemo } from "react";
+import { OrderService } from "src/api";
 
 const Orders: React.FC = () => {
+  const { data, pagination, loading, error } = OrderService.fetchAll();
+
+  console.log({ data, pagination, loading, error });
   const cols = useMemo<ColumnDef<Order>[]>(
     () => [
       {
@@ -44,7 +48,12 @@ const Orders: React.FC = () => {
   return (
     <>
       <Card>
-        <Table columns={cols} data={[]} onSearch={(query) => {}}></Table>
+        <Table
+          columns={cols}
+          data={data ?? []}
+          onSearch={(query) => {}}
+          pagination={pagination}
+        ></Table>
       </Card>
     </>
   );
