@@ -6,11 +6,11 @@ type IAPIConfig = {
   type: Method;
   withPagination?: boolean;
   data?: any;
-  dependes?: any;
+  dependes?: number | boolean;
 };
 
 export function useFetch<T>(url: string, config: IAPIConfig) {
-  const dependes = config.dependes ?? true;
+  const dependes = config.dependes === undefined ? true : config.dependes;
   const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<String>();
@@ -20,7 +20,9 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
     const controller = new AbortController();
     // const source = axios.CancelToken.source();
     const fetchData = async () => {
-      setLoading(true)
+      setLoading(true);
+      setError(undefined);
+      setData(undefined)
       try {
         const response = await axios.request({
           url,
@@ -49,14 +51,14 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
         setLoading(false);
       }
     };
-    if (config.dependes) {
+    if (dependes) {
       fetchData();
     }
     return () => {
       controller.abort();
       // source.cancel()
     };
-  }, [url, config.type, config.dependes]);
+  }, [url, config.type, dependes]);
 
   return {
     data,

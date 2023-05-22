@@ -8,7 +8,6 @@ export class OrderService {
       {
         type: "GET",
         withPagination: true,
-        dependes: true,
       }
     );
   }
