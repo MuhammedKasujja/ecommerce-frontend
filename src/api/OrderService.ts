@@ -7,7 +7,8 @@ export class OrderService {
       "http://127.0.0.1:8000/api/admin/orders/list/canceled",
       {
         type: "GET",
-        withPagination: true
+        withPagination: true,
+        dependes: true,
       }
     );
   }

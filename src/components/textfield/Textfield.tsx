@@ -48,7 +48,7 @@ const TextField = (
     new Date().getTime().toString();
 
   return (
-    <div  className={mergeClassNames(classes.textfield)}>
+    <div className={mergeClassNames(classes.textfield)}>
       {label && (
         <label
           htmlFor={textfieldId}
@@ -91,6 +91,7 @@ const TextField = (
             spellCheck={false}
             disabled={isDisabled}
             onChange={(e) => onChange(e.target.value)}
+            onInput={(e) => onChange(e.currentTarget.value)}
             {...rest}
             id={textfieldId}
           />
