@@ -1,17 +1,41 @@
-import { Button, Card, Dropzone, TextField } from "src/components";
+import { useState } from "react";
+import { CategoryService } from "src/api";
+import { Button, Card, Dropzone, FileInput, TextField } from "src/components";
+import { CategoryDTO } from "src/types";
 
 const CategoryForm: React.FC = () => {
+  const [category, setCategory] = useState<CategoryDTO>();
+  const [submit, setSubmit] = useState(0);
+  const { loading, error, data } = CategoryService.addNew(category!, submit);
+
+  const handleChange = (data: Record<string, any>) => {
+    setCategory((prevCat) => ({ ...prevCat!, ...data }));
+  };
+
   return (
     <Card header="Category form">
+      {error && (
+        <div className="text-red-600 bg-red-100 p-1 rounded">{error}</div>
+      )}
       <div className="flex flex-col gap-4 mb-4">
-        <TextField label="New category" placeholder="Eg: bread" />
-        <Dropzone />
+        <TextField
+          label="New category"
+          placeholder="Eg: Phone"
+          onChange={(name) => handleChange({ name })}
+        />
+        <FileInput title="Image" handleChange={(image)=>handleChange({ image })} />
+        <Dropzone/>
       </div>
       <div className="flex justify-end">
-        <Button className="">SAVE</Button>
+        <Button
+          isLoading={loading}
+          onClick={(_) => setSubmit((prev) => ++prev)}
+        >
+          SAVE
+        </Button>
       </div>
     </Card>
   );
 };
 
-export default CategoryForm
+export default CategoryForm;

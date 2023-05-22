@@ -1,18 +1,13 @@
 import { mergeClassNames } from "src/utils/utils";
 import classes from "./FileInput.module.scss";
 import { ChangeEvent, useState } from "react";
-
-type FileInputProps = {
-  hint?: string;
-  title: string;
-  preview?: boolean;
-  handleChange(file: File | null | undefined): void;
-};
+import { FileInputProps, FileType } from "./FileInput.type";
 
 const defaultFileInputProps: FileInputProps = {
   hint: undefined,
   title: "",
   preview: true,
+  type: FileType.image,
   handleChange: (_) => {},
 };
 
@@ -20,6 +15,7 @@ const FileInput: React.FC<FileInputProps> = ({
   hint,
   title,
   handleChange,
+  type,
   preview,
 }) => {
   const [filePreview, setFilePreview] = useState("");
@@ -62,6 +58,7 @@ const FileInput: React.FC<FileInputProps> = ({
         id="file_input"
         type="file"
         onChange={onFileChange}
+        accept={type}
       ></input>
       {hint && (
         <p
