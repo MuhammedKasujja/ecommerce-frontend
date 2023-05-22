@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { ProductService } from "src/api";
-import { Card, Table } from "src/components";
+import { Card, Switch, Table } from "src/components";
 import { ColumnDef, Product } from "src/types";
 
 const Products: React.FC = () => {
@@ -23,11 +23,16 @@ const Products: React.FC = () => {
       },
       {
         header: "SELLING PRICE",
-        accessorFn: (row) => row.selling_price,
+        accessorFn: (row) => row.unit_price,
       },
       {
         header: "FEATURED",
-        accessorFn: (row) => row.featured,
+        accessorFn: (row) => row.featured_status,
+        cell: (row) => (
+          <div>
+            <Switch name="select" value={row.getValue() as any} />
+          </div>
+        ),
       },
       {
         header: "STATUS",

@@ -22,7 +22,7 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
     const fetchData = async () => {
       setLoading(true);
       setError(undefined);
-      setData(undefined)
+      // setData(undefined);
       try {
         const response = await axios.request({
           url,
