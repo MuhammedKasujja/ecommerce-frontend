@@ -1,11 +1,12 @@
 import { useFetch } from "src/hooks/useFetch";
-import { Brand, BrandDTO } from "src/types";
+import { Brand, BrandDTO, ISearchQuery } from "src/types";
 
 export class BrandService {
-  static fetchAll() {
-    return useFetch<Brand[]>("http://127.0.0.1:8000/api/admin/brand/list", {
+  static fetchAll(query?: ISearchQuery) {
+    console.log({query})
+    return useFetch<Brand[]>(query?.link ?? "http://127.0.0.1:8000/api/admin/brand/list", {
       type: "GET",
-      withPagination:true
+      withPagination: true,
     });
   }
 

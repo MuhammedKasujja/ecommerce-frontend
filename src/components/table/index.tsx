@@ -5,14 +5,7 @@ import { PaginationProps } from "./pagination/Pagination.type";
 import { TableProps } from "./Table.type";
 import TextField from "../textfield/Textfield";
 import ShowItems from "./show-items/ShowItems";
-
-type ISearchQuery = {
-  order: string;
-  column: string;
-  length: number;
-  query?: Record<string, any>;
-  link?: string;
-};
+import { ISearchQuery } from "src/types";
 
 type ITableProps<T extends Object> = {
   onSearch(query: ISearchQuery): void;
@@ -27,11 +20,11 @@ const TableNew = <T extends Object>({
   pagination,
 }: ITableProps<T>) => {
   const [searchQuery, setSearchQuery] = useState<ISearchQuery>({
-    order: "",
-    column: "",
+    order: undefined,
+    column: undefined,
     length: 10,
-    query: {},
-    link: "",
+    query: undefined,
+    link: undefined,
   });
 
   useEffect(() => {

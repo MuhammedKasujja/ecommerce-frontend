@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios, { Method } from "axios";
 import { PaginationProps } from "src/components/table/pagination/Pagination.type";
+import { AppUtils } from "src/utils";
 
 type IAPIConfig = {
   type: Method;
@@ -26,6 +27,7 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
       setMessage(undefined);
       // setData(undefined);
       const lang = localStorage.getItem("lang") ?? "en";
+
       if (config.data instanceof FormData) {
         const formData = config.data;
         formData.append("lang", lang);
@@ -36,6 +38,7 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
           lang,
         };
       }
+
       try {
         const response = await axios.request({
           url,
@@ -45,9 +48,15 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
           // cancelToken: source.token
         });
         const { payload, error, message } = response.data;
-        setMessage(message);
+
+        if (message) {
+          setMessage(message);
+          AppUtils.showNotification(message, "success");
+        }
+
         if (error) {
           setError(error);
+          AppUtils.showNotification(error, "error");
         } else {
           if (config.withPagination) {
             // console.log({payload})

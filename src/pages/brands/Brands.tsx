@@ -1,11 +1,12 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { BrandService } from "src/api";
 import { Card, Table } from "src/components";
-import { ColumnDef, Brand } from "src/types";
+import { ColumnDef, Brand, ISearchQuery } from "src/types";
 
 const Brands: React.FC = () => {
-  const { loading, error, data, pagination } = BrandService.fetchAll();
-  console.log({ loading, error, data, pagination })
+  const [query, setQuery] = useState<ISearchQuery>();
+  const { loading, error, data, pagination } = BrandService.fetchAll(query);
+  console.log({ loading, error, data, pagination });
   const cols = useMemo<ColumnDef<Brand>[]>(
     () => [
       {
@@ -32,7 +33,7 @@ const Brands: React.FC = () => {
       <Table
         columns={cols}
         data={data ?? []}
-        onSearch={(_) => {}}
+        onSearch={setQuery}
         pagination={pagination}
       />
     </Card>
