@@ -1,8 +1,11 @@
 import { useMemo } from "react";
+import { BrandService } from "src/api";
 import { Card, Table } from "src/components";
 import { ColumnDef, Brand } from "src/types";
 
 const Brands: React.FC = () => {
+  const { loading, error, data, pagination } = BrandService.fetchAll();
+  console.log({ loading, error, data, pagination })
   const cols = useMemo<ColumnDef<Brand>[]>(
     () => [
       {
@@ -26,7 +29,12 @@ const Brands: React.FC = () => {
   );
   return (
     <Card>
-      <Table columns={cols} data={[]} onSearch={(query) => {}} />
+      <Table
+        columns={cols}
+        data={data ?? []}
+        onSearch={(_) => {}}
+        pagination={pagination}
+      />
     </Card>
   );
 };

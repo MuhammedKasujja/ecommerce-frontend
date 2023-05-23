@@ -23,8 +23,19 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
     const fetchData = async () => {
       setLoading(true);
       setError(undefined);
-      setMessage(undefined)
+      setMessage(undefined);
       // setData(undefined);
+      const lang = localStorage.getItem("lang") ?? "en";
+      if (config.data instanceof FormData) {
+        const formData = config.data;
+        formData.append("lang", lang);
+        config.data = formData;
+      } else {
+        config.data = {
+          ...config.data,
+          lang,
+        };
+      }
       try {
         const response = await axios.request({
           url,
@@ -33,8 +44,8 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
           data: config.data,
           // cancelToken: source.token
         });
-        const { payload, error, message} = response.data;
-        setMessage(message)
+        const { payload, error, message } = response.data;
+        setMessage(message);
         if (error) {
           setError(error);
         } else {

@@ -3,3 +3,9 @@ export type Brand = {
   name: string;
   image?: string;
 };
+
+
+export type BrandDTO ={
+  name: string,
+  image: Blob | string
+}

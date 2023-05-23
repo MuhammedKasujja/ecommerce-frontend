@@ -6,7 +6,7 @@ import { LoginDTO } from "src/types";
 const Login: React.FC = () => {
   const [credentials, setCredentials] = useState<LoginDTO>();
   const [isClicked, setIsClicked] = useState(0);
-  const { loading, error, data } = AuthService.login(credentials!, isClicked);
+  const { loading, error } = AuthService.login(credentials!, isClicked);
 
   const handleChange = (data: Record<string, any>) => {
     setCredentials((prevData) => ({ ...prevData!, ...data }));
@@ -16,7 +16,10 @@ const Login: React.FC = () => {
     <div className="grid place-items-center h-screen bg-slate-200">
       <div className="m-auto w-4/5 max-w-md md:w-2/5">
         <Card>
-          <form className="flex flex-col gap-4">
+          <form
+            className="flex flex-col gap-4"
+            onSubmit={(e) => e.preventDefault()}
+          >
             {error && (
               <div className="text-red-600 bg-red-100 p-1 rounded">{error}</div>
             )}
@@ -34,12 +37,8 @@ const Login: React.FC = () => {
               required
             />
             <Button
-              type="button"
               isLoading={loading}
-              onClick={(_) => {
-
-                setIsClicked((prev) => ++prev);
-              }}
+              onClick={(_) => setIsClicked((prev) => ++prev)}
             >
               Login
             </Button>

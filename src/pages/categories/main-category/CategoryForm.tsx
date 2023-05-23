@@ -6,7 +6,7 @@ import { CategoryDTO } from "src/types";
 const CategoryForm: React.FC = () => {
   const [category, setCategory] = useState<CategoryDTO>();
   const [submit, setSubmit] = useState(0);
-  const { loading, error, data, message } = CategoryService.addNew(category!, submit);
+  const { loading, error, message } = CategoryService.addNew(category!, submit);
 
   const handleChange = (data: Record<string, any>) => {
     setCategory((prevCat) => ({ ...prevCat!, ...data }));
