@@ -8,6 +8,7 @@ type IAPIConfig = {
   withPagination?: boolean;
   data?: any;
   dependes?: number | boolean;
+  params?: any;
 };
 
 export function useFetch<T>(url: string, config: IAPIConfig) {
@@ -41,10 +42,12 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
 
       try {
         const response = await axios.request({
+          baseURL: import.meta.env.BACKEND_API_URL,
           url,
           method: config.type ?? "GET",
           signal: controller.signal,
           data: config.data,
+          params: config.params,
           // cancelToken: source.token
         });
         const { payload, error, message } = response.data;
@@ -67,8 +70,15 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
             setData(payload);
           }
         }
-      } catch (error) {
-        if (!controller.signal.aborted) setError(`${error}`);
+      } catch (error: any) {
+        // console.log({error})
+        let errorMessage = null;
+        if (error.response && error.response.data) {
+          errorMessage = error.response.data.message;
+        } else {
+          errorMessage = error.message;
+        }
+        if (!controller.signal.aborted) setError(errorMessage);
         // if (axios.isCancel(error)) setError(`${error}`)
       } finally {
         setLoading(false);
