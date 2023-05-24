@@ -1,7 +1,7 @@
 import { mergeClassNames } from "src/utils/utils";
 import classes from "./Dropzone.module.scss";
 import { useDropzone } from "react-dropzone";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type DropzoneProps = {
   hint?: string;
@@ -41,8 +41,11 @@ const Dropzone: React.FC<DropzoneProps> = ({
         )
       );
     }
-    onFiles(files);
   }, []);
+
+  useEffect(() => {
+    onFiles(files);
+  }, [files]);
 
   const { getRootProps, getInputProps } = useDropzone({
     noClick: true,

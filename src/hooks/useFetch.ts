@@ -42,7 +42,7 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
 
       try {
         const response = await axios.request({
-          baseURL: import.meta.env.BACKEND_API_URL,
+          baseURL: import.meta.env.VITE_BACKEND_API_URL,
           url,
           method: config.type ?? "GET",
           signal: controller.signal,
@@ -62,7 +62,6 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
           AppUtils.showNotification(error, "error");
         } else {
           if (config.withPagination) {
-            // console.log({payload})
             const { data, ...rest } = payload;
             setData(data);
             setPagination({ ...rest });
@@ -71,13 +70,13 @@ export function useFetch<T>(url: string, config: IAPIConfig) {
           }
         }
       } catch (error: any) {
-        // console.log({error})
+        console.log({error})
         let errorMessage = null;
-        if (error.response && error.response.data) {
-          errorMessage = error.response.data.message;
-        } else {
+        // if (error.response && error.response.data) {
+        //   errorMessage = error.response.data.message;
+        // } else {
           errorMessage = error.message;
-        }
+        // }
         if (!controller.signal.aborted) setError(errorMessage);
         // if (axios.isCancel(error)) setError(`${error}`)
       } finally {
