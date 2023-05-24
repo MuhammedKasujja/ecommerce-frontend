@@ -6,20 +6,42 @@ import { useCallback, useState } from "react";
 type DropzoneProps = {
   hint?: string;
   onFiles(files: File[]): void;
+  multipleFiles?: boolean;
 };
 
-const Dropzone: React.FC<DropzoneProps> = ({ hint, onFiles }) => {
+const defaultProps: DropzoneProps = {
+  hint: "SVG, PNG, JPG or GIF (MAX. 800x400px)",
+  onFiles: (_) => {},
+  multipleFiles: false,
+};
+
+const Dropzone: React.FC<DropzoneProps> = ({
+  hint,
+  onFiles,
+  multipleFiles,
+}) => {
   const [files, setFiles] = useState<File[]>([]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    onFiles(acceptedFiles);
-    setFiles(
-      acceptedFiles.map((file) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file),
-        })
-      )
-    );
+    if (multipleFiles) {
+      setFiles((prevFiles) => [
+        ...prevFiles,
+        ...acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        ),
+      ]);
+    } else {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    }
+    onFiles(files);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -54,7 +76,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ hint, onFiles }) => {
         <div className={mergeClassNames(classes.dropzone_hint_container)}>
           <svg
             aria-hidden="true"
-            className="w-8 h-8 mb-3 text-gray-400"
+            className="w-10 h-10 mb-3 text-gray-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -72,7 +94,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ hint, onFiles }) => {
             drop
           </p>
           <p className={mergeClassNames(classes.dropzone_hint_action_text)}>
-            {hint ?? "SVG, PNG, JPG or GIF (MAX. 800x400px)"}
+            {hint}
           </p>
         </div>
         <input
@@ -86,5 +108,7 @@ const Dropzone: React.FC<DropzoneProps> = ({ hint, onFiles }) => {
     </div>
   );
 };
+
+Dropzone.defaultProps = defaultProps;
 
 export default Dropzone;
