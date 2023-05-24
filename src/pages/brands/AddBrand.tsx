@@ -23,8 +23,8 @@ const AddBrand: React.FC = () => {
             placeholder="Eg: bread"
             onChange={(name) => handleChange({ name })}
           />
-          {/* <Dropzone /> */}
-          <FileInput title="Image" handleChange={(image)=>handleChange({ image })} />
+          <Dropzone onFiles={(files) => handleChange({ image: files[0] })} />
+          {/* <FileInput title="Image" handleChange={(image)=>handleChange({ image })} /> */}
         </div>
         <div className="flex justify-end">
           <Button
