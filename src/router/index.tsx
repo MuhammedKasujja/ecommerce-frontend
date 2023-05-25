@@ -2,6 +2,7 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 import App from "src/App";
 import {
   AddBrand,
+  AddProduct,
   Brands,
   Categories,
   Dashboard,
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
       },
 
       // Products
+      {
+        path: "products/add",
+        element: <AddProduct/>,
+      },
 
       {
         path: "products/in-house",

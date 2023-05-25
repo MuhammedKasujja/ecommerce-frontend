@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrandService } from "src/api";
-import { Button, Card, Dropzone, FileInput, TextField } from "src/components";
+import { Button, Card, Dropzone, TextField } from "src/components";
 import { BrandDTO } from "src/types";
 
 const AddBrand: React.FC = () => {
